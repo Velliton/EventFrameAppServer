@@ -46,24 +46,17 @@ let insVal3;
 
 app.use(bodyParser.json());
 
-/* app.get('/someval',(req,res)=>{
-
-  }) */
-
-app.post('/someval',(req8,res8)=>{
-    insVal1 = req8.body.lotParam1;
-    insVal2=req8.body.startDateParam;
-    insVal3=req8.body.endDateParam;
-    console.log(insVal1);
-    console.log(insVal2);
-    console.log(insVal3);
-    res8.send(req8.body);
+app.post('/paramsApi',(req,res)=>{
+    insVal1 = req.body.lotParam1;
+    insVal2=req.body.startDateParam;
+    insVal3=req.body.endDateParam;
+    res.send(req.body);
 })
 
 
 
 
-/* формирования ответа клиенту */
+/* формирования ответа*/
 
 app.get('/api', (req, res) => {
     console.log(req);
@@ -82,15 +75,15 @@ app.get('/api', (req, res) => {
         
 });
 
-app.get('/frames', (req1, res1) => {
+app.get('/frames', (req, res) => {
 
 const query1 =`exec List_FrameNameValue`;
-sql.query(query1, (err1, result1) => {
-if (err1) {
-        console.error('Ошибка выполнения запроса:', err1);
-            res1.status(500).send('Ошибка сервера');
+sql.query(query1, (err, result) => {
+if (err) {
+        console.error('Ошибка выполнения запроса:', err);
+            res.status(500).send('Ошибка сервера');
             return;
         }
-        res1.json(result1.recordset);
+        res.json(result.recordset);
         }); 
 });
